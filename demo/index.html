@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <title>Ajaxify Demo</title>
+    <meta charset="utf-8"/>
+    <style>
+
+      body {
+        font-family: sans-serif;
+      }
+
+      form.demo {
+        max-width: 500px;
+        margin: 50px auto;
+      }
+
+      input,select {
+        display: block;
+        margin: 10px 0 20px;
+      }
+
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="../ajaxify.css"/>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+    </script>
+
+    <!-- Ajaxify Plugin -->
+    <script src="../ajaxify.js"></script>
+
+  </head>
+  <body>
+    <form action="" method="GET" class="demo">
+
+      <h3>Ajaxify Demonstration</h3>
+
+      <label for="first_name">What is Your Name?</label>
+      <input type="text" name="first_name" value=""/>
+
+      <label for="quest">What is Your Quest?</label>
+      <input type="text" name="quest" value=""/>
+
+      <label for="fav_color">What is Your Favorite Color?</label>
+      <select name="fav_color"> 
+        <option value="">Pick a Color</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+      </select>
+
+      <input type="submit" value="Go!"/>
+
+    </form>
+    <script>
+      var $form = $('form.demo');
+
+      $form.ajaxify({
+        on_validate: function (data) {
+
+          console.log(data);
+          if (!data.first_name || !data.fav_color || !data.quest)
+            return {
+              err_message: "AAAaaAaAAh!"
+            };
+
+          if (data.fav_color != "blue") 
+            return true;
+
+          // set error for picking blue
+          return {
+            err_message: "blue... no wait! AAAaAAah!"
+          }
+
+        },
+        on_result: function (result) {
+
+          alert('You chose right!');
+
+        }
+      });
+
+    </script>
+  </body>
+</html>

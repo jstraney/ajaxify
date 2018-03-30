@@ -1,0 +1,72 @@
+/**** AJAXIFY ****/
+
+form.ajaxified {
+  margin-top: 3em;
+  padding-top: 15px;
+  position  : relative;
+}
+
+form.ajaxified:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+}
+
+@keyframes loading-dots {
+
+  0% {
+    content: ".";
+  }
+
+  33.333% {
+    content: ".";
+  }
+
+  33.334% {
+    content: "..";
+  }
+
+  66.666% {
+    content: "..";
+  }
+
+  66.667% {
+    content: "...";
+  }
+
+  100% {
+    content: "...";
+  }
+
+}
+
+form.ajaxified.waiting:before {
+  content: ".";
+  -webkit-animation: loading-dots 3s infinite;
+  -moz-animation: loading-dots 3s infinite;
+  -o-animation: loading-dots 3s infinite;
+  animation: loading-dots 3s infinite;
+  font-size: 2em;
+}
+
+form.ajaxified.finished:before {
+  content: "Done";
+}
+
+form.ajaxified span.error {
+  position: absolute;
+  bottom : 100%;
+  left: 0;
+  color: #ff0022;
+}
+
+form.ajaxified span.error:before {
+  content: "X";
+  border-radius: 200px;
+  width: 24px;
+  height: 24px;
+  font-size: .8em;
+  display: inline-block;
+  vertical-align: middle;
+}
